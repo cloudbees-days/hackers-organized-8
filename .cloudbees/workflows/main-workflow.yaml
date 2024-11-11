@@ -18,6 +18,7 @@ jobs:
       - uses: cloudbees-io/ghactions-run-workflow@v2
         name: Run GHA Workflow
         kind: test
+        # adding continue-on-error ONLY for DOW Demo 
         continue-on-error: true
         with:
           token: ${{ secrets.GH_TOKEN }}
@@ -29,6 +30,7 @@ jobs:
           test-result-location: junit.xml
       - uses: cloudbees-io/checkout@v1
         name: Get source code
+        # adding continue-on-error ONLY for DOW Demo 
         continue-on-error: true
       - name: Run unit tests
         id: RunUnitTest
@@ -55,9 +57,11 @@ jobs:
       - uses: cloudbees-io/checkout@v1
         name: Get source code
         kind: build
+        # adding continue-on-error ONLY for DOW Demo 
         continue-on-error: true
       - uses: cloudbees-io/configure-oci-credentials@v1
         name: Configure container registry credentials
+        # adding continue-on-error ONLY for DOW Demo 
         continue-on-error: true
         id: dockerconfig
         with:
@@ -73,6 +77,7 @@ jobs:
           build-args: BUILDKIT_CONTEXT_KEEP_GIT_DIR=1,BUILDKIT_INLINE_CACHE=1
       - uses: calculi-corp/assets-plugin-chain-utils/upload-binary@v1
         name: Upload binary from container build
+        # adding continue-on-error ONLY for DOW Demo 
         continue-on-error: true
         id: upload-binary
         with:
@@ -108,6 +113,7 @@ jobs:
       - uses: cloudbees-io/sonarqube-bundled-sast-scan-code@v1
         name: Scan with SonarQube
         kind: scan
+        # adding continue-on-error ONLY for DOW Demo 
         continue-on-error: true
         with:
           language: LANGUAGE_JS
@@ -116,6 +122,7 @@ jobs:
       - uses: cloudbees-io/snyk-sast-scan-code@v1
         name: Synk SAST
         kind: scan
+        # adding continue-on-error ONLY for DOW Demo 
         continue-on-error: true
         with:
           orgname: ${{ secrets.SNYK_ORGNAME }}
@@ -123,6 +130,7 @@ jobs:
           language: LANGUAGE_JS
       - name: Scan with Snyk SCA
         uses: cloudbees-io/snyk-sca-scan-dependency@v1
+        # adding continue-on-error ONLY for DOW Demo 
         continue-on-error: true
         with:
           orgname: ${{ secrets.SNYK_ORGNAME }}
